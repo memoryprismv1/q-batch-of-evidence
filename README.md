@@ -26,6 +26,7 @@ Q-Batch does not guarantee that an environment is clean merely because a new cha
 ## Start here
 
 - [Specification](SPECIFICATION.md) — the method and minimum records.
+- [Peer Review skill](https://github.com/memoryprismv1/cognitive-interface-ai-skills/tree/main/peer-review) — a reusable reviewer behaviour for examining preserved outputs against the predeclared criteria. It does not replace the specification, batch records, or comparison record.
 - [License](LICENSE) — Creative Commons Attribution-NonCommercial 4.0 International.
 
 ## Status
