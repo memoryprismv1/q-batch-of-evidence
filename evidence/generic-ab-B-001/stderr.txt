@@ -1,0 +1,8 @@
+test_many (test_fixture.ClassifyCountTests.test_many) ... ok
+test_one (test_fixture.ClassifyCountTests.test_one) ... ok
+test_zero (test_fixture.ClassifyCountTests.test_zero) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
