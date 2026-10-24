@@ -23,10 +23,15 @@ The batches do **not** have to run at the same time, on the same day, one after 
 
 Q-Batch does not guarantee that an environment is clean merely because a new chat or process was started. The relevant reset and persistent-state assumptions should be recorded. If two batches intentionally differ, the result describes that difference; it does not by itself prove which difference caused an observed outcome.
 
-## Start here
+## Formats and first demonstration
 
-- [Specification](SPECIFICATION.md) — the method and minimum records.
-- [Peer Review skill](https://github.com/memoryprismv1/cognitive-interface-ai-skills/tree/main/peer-review) — a reusable reviewer behaviour for examining preserved outputs against the predeclared criteria. It does not replace the specification, batch records, or comparison record.
+- [Specification](SPECIFICATION.md) — method and minimum records.
+- [Basic Evidence Log Format](BASIC_LOG_FORMAT.md) — reusable, domain-neutral batch record.
+- [Software-Testing Log Format](formats/SOFTWARE_TEST_LOG.md) — derived format extending the basic log.
+- [Generic A/B demonstration plan](examples/generic_ab/PLAN.md) — comment-only code change, declared expectations, and limits.
+- [A/B comparison record](evidence/generic-ab-comparison.json) — offline comparison of the two observed test runs.
+- [Batch A log](evidence/generic-ab-A-001/log.json) and [Batch B log](evidence/generic-ab-B-001/log.json) — separate records and artifact hashes.
+- [Peer Review skill](https://github.com/memoryprismv1/cognitive-interface-ai-skills/tree/main/peer-review) — reviewer behaviour for examining preserved outputs against predeclared criteria. It does not replace the specification or evidence records.
 - [License](LICENSE) — Creative Commons Attribution-NonCommercial 4.0 International.
 
 ## Status
