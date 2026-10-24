@@ -1,0 +1,52 @@
+{
+  "schema_version": "qbatch-software-test-log/0.1",
+  "extends": "basic-evidence-log/0.1",
+  "batch_id": "generic-ab-B-001",
+  "purpose": "Check whether comment-only source changes alter test outcomes",
+  "specification_ref": "examples/generic_ab/PLAN.md",
+  "condition": "B",
+  "started_at": "2026-10-24T04:19:53.862760+00:00",
+  "ended_at": "2026-10-24T04:19:54.692301+00:00",
+  "executor": {"name": "Python subprocess runner", "version": "3.13.5"},
+  "environment": {"os": "linux", "reset": "fresh temporary directory and fresh Python process", "network": "not used during execution"},
+  "inputs": [],
+  "resources": [
+    {"path": "fixture.py", "sha256": "7e37084b4aab0ce2fad5c503346c782fd7a359f5dc312502a3e1cc9acb892251"},
+    {"path": "test_fixture.py", "sha256": "d3b28fed81ebb45d165c65ad43af5808c729c5c890703badc52cd928bc6cdd3e"}
+  ],
+  "procedure": ["/opt/pyvenv/bin/python -m unittest -v test_fixture.py"],
+  "status": "completed",
+  "events": [
+    {"event_id": "B-1", "sequence": 1, "timestamp": "2026-10-24T04:19:53.862760+00:00", "type": "start", "actor": "runner", "action": "execute unit tests", "observation": "subprocess started", "status": "observed"},
+    {"event_id": "B-2", "sequence": 2, "timestamp": "2026-10-24T04:19:54.692301+00:00", "type": "end", "actor": "runner", "action": "finish unit tests", "observation": "exit code 0; 3 passing tests detected from output", "status": "completed"}
+  ],
+  "outputs": [
+    {"path": "stdout.txt", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    {"path": "stderr.txt", "sha256": "21dcfc78b43ded7e5450069014b02d09a70daefb008fdcbf72db2289fd5b1c2b"}
+  ],
+  "deviations": [],
+  "limitations": [
+    "Executed in a local temporary directory from source content matching the committed fixture; the GitHub branch itself was not checked out because network DNS was unavailable.",
+    "One small test suite establishes only these cases, not general semantic equivalence."
+  ],
+  "provenance": {"collector": "local Python subprocess", "collected_at": "2026-10-24T04:19:54.692301+00:00", "source_revision": "e2a09c163f153002956777d25d490537ea50b03f"},
+  "interpretation": null,
+  "software_test": {
+    "source_revision": "e2a09c163f153002956777d25d490537ea50b03f",
+    "source_diff_ref": "B differs from A by comments only (source reviewed)",
+    "runtime": "Python 3.13.5",
+    "dependency_lock_ref": "none; standard library only",
+    "test_command": "/opt/pyvenv/bin/python -m unittest -v test_fixture.py",
+    "working_directory": "/tmp/qbatch-evidence-demo/B",
+    "test_framework": "unittest",
+    "exit_code": 0,
+    "test_counts": {"passed": 3, "failed": 0, "skipped": 0, "errors": 0, "collected": 3},
+    "assertions": ["zero -> empty", "one -> single", "two and seventeen -> multiple"],
+    "stdout_ref": {"path": "stdout.txt", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    "stderr_ref": {"path": "stderr.txt", "sha256": "21dcfc78b43ded7e5450069014b02d09a70daefb008fdcbf72db2289fd5b1c2b"},
+    "coverage_ref": null,
+    "changed_files": ["fixture.py"],
+    "acceptance_result": "pass",
+    "validation_result": {"status": "pass", "reasons": []}
+  }
+}
