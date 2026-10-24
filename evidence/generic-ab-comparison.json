@@ -1,0 +1,19 @@
+{
+  "schema_version": "qbatch-comparison/0.1",
+  "batches": ["generic-ab-A-001", "generic-ab-B-001"],
+  "criteria": ["both test suites pass", "B source diff is comments only", "test outputs agree"],
+  "observed": {
+    "A_exit_code": 0,
+    "B_exit_code": 0,
+    "A_passed": 3,
+    "B_passed": 3,
+    "source_sha256_A": "4640a8843fade9fccfcd1bf6801747f75dd593f03ea80bfa2c0abb5ed915aac4",
+    "source_sha256_B": "7e37084b4aab0ce2fad5c503346c782fd7a359f5dc312502a3e1cc9acb892251"
+  },
+  "conclusion": "Both test runs passed all three test methods. This supports matching outcomes for the declared fixture and inputs only. Source hashes differ as expected; comment-only diff was reviewed separately.",
+  "limitations": [
+    "Not a statistical or user-facing A/B test.",
+    "Local execution used source content matching committed fixture files; branches were not checked out directly because network DNS was unavailable.",
+    "Does not establish equivalence for all inputs."
+  ]
+}
