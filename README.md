@@ -31,6 +31,18 @@ Q-Batch does not guarantee that an environment is clean merely because a new cha
 - [AEL Runtime Evidence Extension](formats/AEL_RUNTIME_EVIDENCE.md) — links Q-Batch evidence to AEL's ledger, audit sidecar, model-input boundary, and failure/recovery records.
 - [Synthetic AEL failed-run example](examples/ael_runtime/synthetic-failed-run.json) — concrete pre-inference failure scenario for reconstruction checks; synthetic, not a real execution record.
 - [Synthetic AEL failed-run template](examples/ael_runtime/failed-run-template.json) — blank schema/reconstruction fixture, explicitly not a real execution record.
+- [AEL evidence validator](tools/validate_ael_evidence.py) — dependency-free structural checks, with an optional reconstruction gate.
+- [Validator tests](tests/test_validate_ael_evidence.py) — unit tests for incomplete templates, missing fields, invalid inference modes, failure-point requirements, response consistency, synthetic records, and a reconstructable failure fixture.
+
+Run the validator from the repository root with Python 3:
+```sh
+python tools/validate_ael_evidence.py examples/ael_runtime/failed-run-template.json
+python tools/validate_ael_evidence.py examples/ael_runtime/synthetic-failed-run.json
+python tools/validate_ael_evidence.py examples/ael_runtime/synthetic-failed-run.json --reconstruct
+python -m unittest discover -s tests -p 'test_validate_ael_evidence.py' -v
+``
+
+The first two commands check structure only. The reconstruction gate is intentionally stricter: the published synthetic example should fail it because it does not represent observed execution or preserved artifacts. Passing structural checks does not prove runtime correctness or that the referenced artifacts exist.
 - [Generic A/B demonstration plan](examples/generic_ab/PLAN.md) — comment-only code change, declared expectations, and limits.
 - [A/B comparison record](evidence/generic-ab-comparison.json) — offline comparison of the two observed test runs.
 - [Batch A log](evidence/generic-ab-A-001/log.json) and [Batch B log](evidence/generic-ab-B-001/log.json) — separate records and artifact hashes.
