@@ -29,7 +29,8 @@ Q-Batch does not guarantee that an environment is clean merely because a new cha
 - [Basic Evidence Log Format](BASIC_LOG_FORMAT.md) — reusable, domain-neutral batch record.
 - [Software-Testing Log Format](formats/SOFTWARE_TEST_LOG.md) — derived format extending the basic log.
 - [AEL Runtime Evidence Extension](formats/AEL_RUNTIME_EVIDENCE.md) — links Q-Batch evidence to AEL's ledger, audit sidecar, model-input boundary, and failure/recovery records.
-- [Synthetic AEL failed-run template](examples/ael_runtime/failed-run-template.json) — a schema/reconstruction fixture, explicitly not a real execution record.
+- [Synthetic AEL failed-run example](examples/ael_runtime/synthetic-failed-run.json) — concrete pre-inference failure scenario for reconstruction checks; synthetic, not a real execution record.
+- [Synthetic AEL failed-run template](examples/ael_runtime/failed-run-template.json) — blank schema/reconstruction fixture, explicitly not a real execution record.
 - [Generic A/B demonstration plan](examples/generic_ab/PLAN.md) — comment-only code change, declared expectations, and limits.
 - [A/B comparison record](evidence/generic-ab-comparison.json) — offline comparison of the two observed test runs.
 - [Batch A log](evidence/generic-ab-A-001/log.json) and [Batch B log](evidence/generic-ab-B-001/log.json) — separate records and artifact hashes.
