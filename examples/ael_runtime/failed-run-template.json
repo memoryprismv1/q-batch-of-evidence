@@ -1,0 +1,58 @@
+{
+  "schema_version": "qbatch-ael-runtime-evidence/0.1",
+  "extends": [
+    "basic-evidence-log/0.1"
+  ],
+  "batch_id": "ael-failure-template-001",
+  "purpose": "Template for checking whether a failed AEL runtime attempt can be reconstructed from preserved evidence",
+  "specification_ref": "formats/AEL_RUNTIME_EVIDENCE.md",
+  "condition": "failure-path-template",
+  "started_at": null,
+  "ended_at": null,
+  "executor": {
+    "name": "to-be-recorded",
+    "version": null
+  },
+  "environment": {
+    "os": null,
+    "reset": null,
+    "persistence": null
+  },
+  "inputs": [],
+  "resources": [],
+  "procedure": [],
+  "status": "incomplete",
+  "events": [],
+  "outputs": [],
+  "deviations": [],
+  "limitations": [
+    "Synthetic template only; not a record of an executed run."
+  ],
+  "provenance": {
+    "collector": null,
+    "collected_at": null
+  },
+  "interpretation": null,
+  "ael_runtime": {
+    "runtime_version": null,
+    "runtime_source_sha": null,
+    "ledger_ref": null,
+    "ledger_high_watermark": null,
+    "audit_sidecar_ref": null,
+    "model_input_ref": null,
+    "response_ref": null,
+    "model_call": {
+      "adapter": null,
+      "model": null,
+      "endpoint_class": null,
+      "inference_mode": "not_attempted"
+    },
+    "boundary_checks": [],
+    "failure_point": null,
+    "recovery": {
+      "attempted": false,
+      "prior_attempt_batch_id": null,
+      "notes": null
+    }
+  }
+}
