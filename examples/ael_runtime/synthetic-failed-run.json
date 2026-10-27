@@ -1,0 +1,136 @@
+{
+  "schema_version": "qbatch-ael-runtime-evidence/0.1",
+  "extends": [
+    "basic-evidence-log/0.1"
+  ],
+  "batch_id": "synthetic-ael-failure-001",
+  "purpose": "Exercise whether a reviewer can reconstruct a pre-inference failure without relying on recollection",
+  "specification_ref": "formats/AEL_RUNTIME_EVIDENCE.md",
+  "condition": "synthetic-failure-path",
+  "started_at": "2026-10-27T12:00:00Z",
+  "ended_at": "2026-10-27T12:00:01Z",
+  "executor": {
+    "name": "schema-example-only",
+    "version": null
+  },
+  "environment": {
+    "os": "example-only",
+    "reset": "example-only; not an observed execution",
+    "persistence": "not applicable to synthetic fixture"
+  },
+  "inputs": [
+    {
+      "ref": "input/request.json",
+      "sha256": null,
+      "note": "Illustrative reference only; file not supplied"
+    }
+  ],
+  "resources": [
+    {
+      "path": "runtime.py",
+      "revision": null,
+      "sha256": null
+    }
+  ],
+  "procedure": [
+    "Illustrative command requests a model call using a disallowed non-loopback endpoint"
+  ],
+  "status": "failed",
+  "events": [
+    {
+      "event_id": "synthetic-1",
+      "sequence": 1,
+      "timestamp": "2026-10-27T12:00:00Z",
+      "type": "start",
+      "actor": "runner",
+      "action": "begin CLI attempt",
+      "observation": "attempt initiated in illustrative scenario",
+      "status": "observed",
+      "evidence_refs": []
+    },
+    {
+      "event_id": "synthetic-2",
+      "sequence": 2,
+      "timestamp": "2026-10-27T12:00:01Z",
+      "type": "error",
+      "actor": "runtime",
+      "action": "validate endpoint",
+      "observation": "illustrative refusal of non-loopback endpoint before request dispatch",
+      "status": "failed",
+      "evidence_refs": [
+        "outputs/stderr.txt"
+      ]
+    },
+    {
+      "event_id": "synthetic-3",
+      "sequence": 3,
+      "timestamp": "2026-10-27T12:00:01Z",
+      "type": "end",
+      "actor": "runner",
+      "action": "close attempt",
+      "observation": "no model request or response in this illustrative scenario",
+      "status": "failed",
+      "evidence_refs": []
+    }
+  ],
+  "outputs": [
+    {
+      "path": "outputs/stderr.txt",
+      "media_type": "text/plain",
+      "sha256": null,
+      "availability": "illustrative-reference-only"
+    },
+    {
+      "path": "outputs/runtime-audit.json",
+      "media_type": "application/json",
+      "sha256": null,
+      "availability": "not-produced-in-this-synthetic-scenario"
+    },
+    {
+      "path": "outputs/response.json",
+      "media_type": "application/json",
+      "sha256": null,
+      "availability": "not-produced-in-this-synthetic-scenario"
+    }
+  ],
+  "deviations": [],
+  "limitations": [
+    "Synthetic schema exercise only; not an observed AEL runtime execution.",
+    "Artifact paths are illustrative references and do not point to preserved files.",
+    "The example does not assert that the current implementation emits these exact event records."
+  ],
+  "provenance": {
+    "collector": "authored synthetic fixture",
+    "collected_at": "2026-10-27T12:00:00Z"
+  },
+  "interpretation": null,
+  "ael_runtime": {
+    "runtime_version": null,
+    "runtime_source_sha": null,
+    "ledger_ref": null,
+    "ledger_high_watermark": null,
+    "audit_sidecar_ref": null,
+    "model_input_ref": null,
+    "response_ref": null,
+    "model_call": {
+      "adapter": "ollama-chat (illustrative)",
+      "model": null,
+      "endpoint_class": "non-loopback (illustrative)",
+      "inference_mode": "not_attempted"
+    },
+    "boundary_checks": [
+      {
+        "check": "endpoint rejected before dispatch",
+        "expected": "reject",
+        "observed": "illustrative rejection",
+        "result": "example-only"
+      }
+    ],
+    "failure_point": "endpoint_validation",
+    "recovery": {
+      "attempted": false,
+      "prior_attempt_batch_id": null,
+      "notes": "A retry would be a new batch record linked to this attempt."
+    }
+  }
+}
