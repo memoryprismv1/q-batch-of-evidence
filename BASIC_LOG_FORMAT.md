@@ -1,91 +1,114 @@
 # Basic Evidence Log Format
 
-**Status:** Working draft 0.1  
-**Purpose:** A small, domain-neutral record for an independently executed batch. Specialized test formats extend this record; they do not replace or redefine it.
+**Status:** Working draft 0.2  
+**Purpose:** Domain-neutral evidence record for one independently executed batch. Specialized formats extend this record; they do not redefine it.
 
-## Design rules
+## Identity and continuity
 
-- One immutable batch record per execution attempt.
-- Preserve observed facts separately from interpretation.
-- Record failures, timeouts, missing outputs, and collection failures as first-class results.
-- Never silently repair a completed record. Corrections create a new version or an addendum referencing the original.
-- Use stable identifiers and explicit links between batch, events, outputs, and comparison.
-- Hash preserved artefacts when feasible. A hash supports integrity checking; it does not prove that an artefact is truthful or complete.
-- Do not store secrets or unnecessary personal data in public logs.
+Each record represents one attempt. A retry gets a new `batch_id`; failed history is never overwritten.
 
-## Required batch fields
+- `test_id`: stable identity of the logical test/investigation across attempts.
+- `batch_id`: unique identity of this execution attempt.
+- `run_id`: optional ID assigned by the runner; retain separately from Q-Batch IDs.
+- `companion_test_uuid`: optional UUID grouping test records intended to be companions in a comparison or historical series.
+- `condition`: role in a comparison (A/B/control/treatment); not an identity.
+- `parent_batch_id`: prior attempt this one retries or recovers.
+- `comparison_ref`: reference to a separately stored comparison record.
+
+Use distinct IDs for distinct concepts. The companion UUID groups records; it does not prove they are comparable. A comparison must name its actual input batch IDs and criteria.
+
+## Test definition and context
+
+- `summary`, `description`: concise label and scope.
+- `purpose`: question or behaviour examined.
+- `rationale`: why this test exists; motivating observation or decision.
+- `hypothesis`: optional predeclared expectation.
+- `origin_refs`: source discussion, issue, paper, requirement, or prior observation.
+- `git_refs`: repository, branch, commit, tag, or diff; Git metadata is not a substitute for historical context.
+- `method_version`, `specification_ref`: method and frozen test-plan versions/hashes.
+- `context`: structured object carrying the background needed to interpret the test without the original chat or author. Include relevant background, assumptions, scope, constraints, dependencies, and known unknowns. Carry the object with each attempt or reference an immutable, versioned context object.
+
+If test purpose or context changes, preserve the old version and record which version each attempt used. Do not let a mutable branch or current README silently redefine historical tests.
+
+## Core execution fields
 
 | Field | Meaning |
 |---|---|
-| `schema_version` | Version of this basic format |
-| `batch_id` | Unique identifier for this batch attempt |
-| `purpose` | Question or behaviour being examined |
-| `specification_ref` | Frozen test plan and version/hash |
-| `condition` | Declared condition, e.g. A, B, control, treatment |
-| `started_at`, `ended_at` | Timestamps with timezone; null if unknown |
-| `executor` | System, agent, software, or person executing |
-| `environment` | Relevant environment and reset/isolation facts |
-| `inputs` | Input references and hashes where practical |
-| `resources` | Relevant files, instructions, libraries, versions, and hashes |
-| `procedure` | Steps, commands, prompts, or procedure reference |
+| `schema_version` | This format's version |
+| `started_at`, `ended_at` | Timezone-aware timestamps, null if unknown |
+| `executor` | Executing system/agent/person and version |
+| `environment` | Environment, reset/isolation method and limitations |
+| `inputs`, `resources` | Inputs and relevant files/instructions/dependencies, with versions/hashes where practical |
+| `procedure` | Exact steps, commands, prompts, or procedure reference |
 | `status` | `completed`, `failed`, `incomplete`, or `invalid` |
-| `events` | Ordered event records, including errors and omissions |
-| `outputs` | Output/artifact references, media type, and hash where available |
-| `deviations` | Differences from the frozen plan |
-| `limitations` | Missing evidence and known interpretive limits |
-| `provenance` | Collector, collection time, and integrity metadata |
-| `interpretation` | Optional; explicitly separate from observed facts |
+| `events` | Ordered observations, errors, warnings, timeouts and collection gaps |
+| `outputs` | Raw output/artifact references, media types and hashes where available |
+| `deviations` | Departures from the frozen plan |
+| `limitations` | Missing evidence and interpretive limits |
+| `provenance` | Collector, collection time and integrity metadata |
+| `interpretation` | Null until separately evaluated; keep observations distinct from conclusions |
 
-## Event record
+## Event fields
 
-Each event should have, where applicable:
+Where applicable: `event_id`, monotonic `sequence`, timezone-aware `timestamp`, `type`, `actor`, `action`, `observation`, `status`, `evidence_refs`, and `notes`. Keep raw evidence intact. Specialized domains may add event types.
 
-- `event_id`: stable within the batch;
-- `sequence`: monotonically increasing order;
-- `timestamp`: timestamp with timezone;
-- `type`: e.g. `start`, `action`, `response`, `assertion`, `warning`, `error`, `timeout`, `artifact_written`, `collection_gap`, `end`;
-- `actor`: who or what produced/observed the event;
-- `action` and `observation`: what was attempted and what was actually observed;
-- `status`: outcome of that event;
-- `evidence_refs`: references to raw logs or artefacts;
-- `notes`: optional contextual information.
-
-Do not force every domain into the same event vocabulary. Preserve the core fields and allow specialized event types.
-
-## Minimal JSON shape
+## Minimal JSON template
 
 ```json
 {
-  "schema_version": "basic-evidence-log/0.1",
-  "batch_id": "demo-A-001",
-  "purpose": "Check whether comment-only code changes alter test outcomes",
-  "specification_ref": "examples/generic_ab/PLAN.md",
-  "condition": "A",
+  "schema_version": "basic-evidence-log/0.2",
+  "test_id": "stable-logical-test-id",
+  "summary": "Short label",
+  "description": "Scope and behaviour investigated",
+  "purpose": "Question being answered",
+  "rationale": "Why this test was initiated",
+  "hypothesis": null,
+  "origin_refs": [],
+  "git_refs": [],
+  "method_version": null,
+  "specification_ref": null,
+  "context": {
+    "background": [],
+    "assumptions": [],
+    "scope": [],
+    "constraints": [],
+    "dependencies": [],
+    "known_unknowns": []
+  },
+  "batch_id": "unique-attempt-id",
+  "run_id": null,
+  "companion_test_uuid": null,
+  "condition": null,
+  "parent_batch_id": null,
+  "comparison_ref": null,
   "started_at": null,
   "ended_at": null,
-  "executor": {"name": "example-runner", "version": "1.0"},
-  "environment": {"os": "record-at-run-time", "reset": "fresh process; filesystem state declared"},
+  "executor": {"name": null, "version": null},
+  "environment": {"os": null, "reset": null, "limitations": []},
   "inputs": [],
   "resources": [],
-  "procedure": ["Run the declared test command"],
+  "procedure": [],
   "status": "incomplete",
   "events": [],
   "outputs": [],
   "deviations": [],
-  "limitations": ["Example template; not a record of a real execution"],
-  "provenance": {"collector": "example", "collected_at": null},
+  "limitations": ["Template only; no execution has been recorded"],
+  "provenance": {"collector": null, "collected_at": null, "integrity": []},
   "interpretation": null
 }
 ```
 
+Null means unknown/not captured, not zero. Never invent values to make a record look complete.
+
+## Historical and comparison rules
+
+1. Freeze the record and raw artifacts for each attempt; hash artifacts when feasible.
+2. A correction is a new version/addendum referencing the original, not a silent rewrite.
+3. Preserve failures, incomplete attempts, and retries as separate records. Link them with `parent_batch_id`.
+4. Keep raw events and outputs in evidence records/referenced artifacts. Aggregates, scores, comparisons and conclusions belong in separate analysis/comparison records.
+5. A later conclusion must cite the input batch IDs, test/context versions, criteria, evaluator, and limitations.
+6. Avoid secrets and unnecessary personal data in public logs.
+
 ## Specialized formats
 
-A derived format must:
-1. name the basic schema version it extends;
-2. retain all applicable basic fields without changing their meaning;
-3. add domain-specific fields in a clearly named section;
-4. record its own schema version;
-5. define its own acceptance and validation rules;
-6. preserve raw source evidence and distinguish it from generated summaries.
-
-See the AEL runtime repository's software-testing extension for an applied example.
+A derived format must declare the basic schema version it extends, retain applicable base fields with unchanged meanings, add domain fields in a named section, version its schema, define validation/acceptance rules, and distinguish raw evidence from generated summaries. See `formats/SOFTWARE_TEST_LOG.md` and `formats/AEL_RUNTIME_EVIDENCE.md`.
