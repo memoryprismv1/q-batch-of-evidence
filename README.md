@@ -33,6 +33,26 @@ Q-Batch does not guarantee that an environment is clean merely because a new cha
 
 An emerging, practical method. The specification is deliberately small; examples and refinements should follow from real use rather than being invented in advance.
 
+## Supporting implementation
+
+This repository is also the canonical home for Q-Batch's reference implementation and experimental tools:
+
+- `testing_logger/` — shared append-only Q-Batch event and artifact logger.
+- `experiments/ct_ab/` — paired-run harness, event schema, validation, preflight and deterministic method demonstration.
+- `experiments/checklist_elaboration/` — four-condition MP × CT planning experiment, frozen task fixture, runner and scoring materials.
+- `experiments/qbatch_historical_analysis/` — read-only historical evidence and cohort analysis.
+- [Pilot plan](PILOT_PLAN.md) — current status and limitations of the AEL-related pilot.
+
+The [Q-Batch regression workflow](.github/workflows/tests.yml) runs the deterministic test suites. The real-model pilot workflow is manual-dispatch only.
+
+## Relationship to AEL
+
+[AEL Runtime Accountability](https://github.com/memoryprismv1/ael-runtime-accountability) is the system under examination. Its append-only ledger records AEL runtime behaviour and decision authority. Q-Batch records test execution, conditions, observed evidence and historical comparisons. A test can produce both receipt streams; they are separate records with separate purposes and schemas.
+
+## Evidence privacy
+
+This repository is public. Do not use its workflows with private prompts, personal or customer data, credentials, confidential source code, or other sensitive inputs. Raw request/response evidence may reveal experimental conditions. The private checklist-elaboration controller workflow, evaluator-only reference and restricted raw evidence remain in The Differential.
+
 ## Name
 
 The `q-` prefix marks this as QA-related work.
