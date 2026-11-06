@@ -28,7 +28,7 @@ The experiment harness already exists. This plan is not a replacement for it.
 
 ## Frozen protocol source
 
-The controlling experiment instructions are in [experiments/ct_ab/README.md](experiments/ct_ab/README.md), with the executable workflow in [.github/workflows/ct-ab-real-model-pilot.yml](.github/workflows/ct-ab-real-model-pilot.yml). Do not invent a new task, prompt, rubric, model, or skill revision for this pilot.
+The controlling experiment instructions are in [experiments/ct_ab/README.md](experiments/ct_ab/README.md), with the executable workflow in [private Differential workflow](https://github.com/memoryprismv1/the-differential-library/blob/main/.github/workflows/qbatch-checklist-elaboration.yml). Do not invent a new task, prompt, rubric, model, or skill revision for this pilot.
 
 Protocol settings currently declared by the workflow:
 
@@ -52,7 +52,7 @@ Treat a real-model pair as **valid only if all** of these hold:
 4. Controlled manifest fields match; task and condition configuration hashes are preserved.
 5. The independent acceptance suite runs and produces a report for each condition.
 6. The blinded pair report and blind scoring packets are generated.
-7. Raw request/response audit evidence and the controller key must be access-controlled until independent scorecards are frozen. **The current repository is public, so its uploaded audit artifact is not access-controlled from assessors or repo readers. A truly blinded pilot is blocked until a private evidence destination is available.**
+7. Raw request/response audit evidence and the controller key must be access-controlled until independent scorecards are frozen. **The old public AEL workflow uploaded raw audit artifacts and could not preserve blinding. It has been removed. Real-model execution now uses the manual private Differential workflow, which archives raw prompts/responses and the controller key in the private Differential repository. Repository access there is whole-repository access; do not add blinded assessors while raw evidence or the key is present.**
 
 The independent acceptance score is an objective task result. Human assessor ratings are additional qualitative evidence, not a substitute. Agreement between assessors is not proof of correctness. Do not infer skill effectiveness from one pair alone.
 
@@ -71,7 +71,7 @@ For each attempt, record:
 - names and hashes of uploaded artifacts;
 - explicit failure/incomplete reasons and any recovery code changes since the previous attempt.
 
-Keep blind scoring packets separate from full audit evidence in the experiment design. However, the current repository is public and the `ct-ab-audit-evidence` Actions artifact can be downloaded by anyone with repository read access; its raw model requests/responses may reveal the condition. Thus the existing public workflow does not preserve confidential blinding. A real blinded pilot is blocked until the raw evidence is stored in a private repository or equivalent restricted destination. Do not use sensitive inputs in the public workflow.
+Keep blind scoring packets separate from full audit evidence in the experiment design. The previous public workflow and its raw-artifact upload route have been removed. Future real-model execution must use the private Differential workflow; keep raw evidence and the controller key there, and do not grant blinded assessors repository access before scoring is frozen.
 
 ## Run history
 

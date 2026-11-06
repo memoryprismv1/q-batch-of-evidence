@@ -43,7 +43,7 @@ This repository is also the canonical home for Q-Batch's reference implementatio
 - `experiments/qbatch_historical_analysis/` — read-only historical evidence and cohort analysis.
 - [Pilot plan](PILOT_PLAN.md) — current status and limitations of the AEL-related pilot.
 
-The [Q-Batch regression workflow](.github/workflows/tests.yml) runs the deterministic test suites. The real-model pilot workflow is manual-dispatch only.
+The [Q-Batch regression workflow](.github/workflows/tests.yml) runs deterministic and synthetic test suites. Real-model execution is controlled only by the manual, private [Differential workflow](https://github.com/memoryprismv1/the-differential-library/blob/main/.github/workflows/qbatch-checklist-elaboration.yml); this public repository contains no workflow that uploads raw real-model traces.
 
 ## Relationship to AEL
 
