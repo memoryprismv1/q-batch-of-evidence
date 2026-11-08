@@ -334,7 +334,11 @@ def _derive_findings(
         and a.get("authority") == "unknown"
         and grant1.get("verified") is False
     ):
-        raise RuntimeError("T1 did not produce the expected performer/principal/authority distinction")
+        raise RuntimeError(
+            "T1 did not produce the expected performer/principal/authority distinction: "
+            + json.dumps({"decision": a, "host_identity": c1["host_identity"],
+                          "claims": c1.get("self_asserted_claims"), "grant": grant1}, sort_keys=True)
+        )
 
     b = result2["decision"]
     c2 = case2["input"]
