@@ -49,7 +49,7 @@
     }
   ],
   "applicability": [
-    "Multi-agent applications adding agents to an existing human-facing conversation or event API.",
+    "Multi-agent applications adding agents to an existing human-facing message or event API.",
     "Event-recording systems where multiple actor types share one write path.",
     "Tool-using assistants that need to distinguish human messages, assistant messages and tool outputs.",
     "Systems that record actions performed by an agent or service on behalf of another principal."
