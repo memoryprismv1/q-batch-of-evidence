@@ -296,7 +296,9 @@ def _run_one(
             0 if passed else 1,
             [result_ref],
         )
-        logger.finish("succeeded" if passed else "failed", "Synthetic attribution policy case; not model inference.")
+        # The run itself completed successfully even when the evaluated policy
+        # misclassified the case. Keep execution validity separate from outcome.
+        logger.finish("succeeded", "Deterministic policy evaluation completed; matched_expected records the outcome.")
     finally:
         logger.close()
     validation = validate_run(run_dir)
