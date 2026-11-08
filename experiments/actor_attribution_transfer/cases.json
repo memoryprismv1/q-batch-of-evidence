@@ -20,7 +20,7 @@
         },
         "self_asserted_claims": {
           "actor_type": "agent",
-          "actor_id": "agent:planner",
+          "actor_id": "agent:lookalike",
           "source": "agent_runtime",
           "on_behalf_of": "human:release_manager",
           "authority": "delegated_by_claim"
