@@ -1,0 +1,8 @@
+{
+  "source_repository": "memoryprismv1/ael-runtime-accountability",
+  "source_commit": "c0fe725b8982165bb5d48d8835b7efad9e52af1b",
+  "source_path": "examples/team-skill/actor-provenance-authority-separation.json",
+  "source_blob_sha1": "049683d8c890ce30ec7d970b47e9a6e67ee65df4",
+  "source_url": "https://github.com/memoryprismv1/ael-runtime-accountability/blob/c0fe725b8982165bb5d48d8835b7efad9e52af1b/examples/team-skill/actor-provenance-authority-separation.json",
+  "note": "Exact skill snapshot copied from the source file at the pinned AEL merge commit. The runner computes and records the SHA-256 of the bytes it loads."
+}
