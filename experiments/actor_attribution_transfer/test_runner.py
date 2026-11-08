@@ -91,7 +91,17 @@ class ActorAttributionTransferBatchTests(unittest.TestCase):
             self.assertEqual(t4["with_carried_context"]["decision"]["authority"], "unknown")
             self.assertEqual(
                 t4["transfer_rule_ids"],
-                ["derive_provenance_from_trusted_transport"],
+                [
+                    "separate_claimed_principal_from_verified_authority",
+                    "derive_provenance_from_trusted_transport",
+                ],
+            )
+            self.assertEqual(
+                set(t4["with_carried_context"]["decision"]["rules_applied"]),
+                {
+                    "separate_claimed_principal_from_verified_authority",
+                    "derive_provenance_from_trusted_transport",
+                },
             )
 
             # All six execution logs are separately validated and retained.
