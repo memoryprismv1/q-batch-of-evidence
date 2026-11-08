@@ -257,9 +257,10 @@ def _run_one(
             input_refs,
         )
 
-        baseline = legacy_decision(case)
+        case_input = case["input"]
+        baseline = legacy_decision(case_input)
         if policy in {"skill_diagnostic", "carried_context"}:
-            decision = evidence_based_decision(case, rules or set())
+            decision = evidence_based_decision(case_input, rules or set())
         else:
             decision = baseline
 
