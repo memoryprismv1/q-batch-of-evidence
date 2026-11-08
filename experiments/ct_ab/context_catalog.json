@@ -122,6 +122,55 @@
       "created_at": "2026-11-08",
       "created_by": "assistant-authored from user-directed batch-transfer proposal",
       "notes": "This is a deterministic policy/knowledge-transfer test, not a live model-learning experiment. All actors, source metadata and delegation grants are synthetic."
+    },
+    {
+      "context_id": "qbatch-ai-generated-team-learning-v1",
+      "version": 1,
+      "summary": "Test whether a model can derive a provenance-bearing portable context from earlier cases and apply it to unseen cases.",
+      "description": "A one-shot local-model extraction call reads the pinned base skill and T1/T2 evidence, then four held-out cases are run in fresh paired conditions: the original skill alone versus that same skill with the model-generated context file.",
+      "purpose": "Measure whether a model-generated supplemental file adds transferable value beyond the same pinned base skill while preserving positive and negative evidence boundaries.",
+      "rationale": "The preceding deterministic batch only demonstrated transfer by a hand-coded evaluator. This experiment removes the hard-coded learning and classification logic and tests model-generated, file-mediated in-context transfer with blind scoring and provenance receipts.",
+      "hypothesis": "A model may derive useful supplemental guidance from T1/T2 and improve some held-out T3/T6 classifications without regressing the positive tool-receipt and valid-delegation boundaries in T3/T5.",
+      "origin_refs": [
+        {
+          "kind": "repository_file",
+          "ref": "experiments/ai_generated_team_learning/runner.py",
+          "note": "Nine-call local-model runner; no tools or non-loopback network."
+        },
+        {
+          "kind": "repository_file",
+          "ref": "experiments/ai_generated_team_learning/inputs/learning_examples.json",
+          "note": "Only T1/T2 evidence exposed to the learning call, with source receipts."
+        },
+        {
+          "kind": "repository_file",
+          "ref": "experiments/ai_generated_team_learning/inputs/transfer_cases.json",
+          "note": "Held-out T3-T6 inputs; no scoring answers."
+        },
+        {
+          "kind": "repository_file",
+          "ref": "experiments/ai_generated_team_learning/scoring/expected.json",
+          "note": "Independent scoring key, excluded from all model prompts."
+        },
+        {
+          "kind": "repository_file",
+          "ref": "experiments/ai_generated_team_learning/README.md",
+          "note": "Protocol, privacy, execution and interpretation boundaries."
+        },
+        {
+          "kind": "repository_file",
+          "ref": "experiments/actor_attribution_transfer/inputs/actor-attribution-portable-skill.json",
+          "note": "Pinned base skill included in both comparison conditions."
+        },
+        {
+          "kind": "repository_file",
+          "ref": "experiments/actor_attribution_transfer/README.md",
+          "note": "Deterministic predecessor experiment and its limitations."
+        }
+      ],
+      "created_at": "2026-11-08",
+      "created_by": "assistant-authored from user-directed experiment design",
+      "notes": "Harness preparation only. A fake-client CI pass is not inference evidence. No real model run has been executed. All actors, transport records, messages and grants are synthetic. A one-model, one-seed batch is exploratory and does not establish general team skill usefulness."
     }
   ]
 }
