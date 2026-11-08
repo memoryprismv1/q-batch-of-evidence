@@ -88,6 +88,40 @@
       "created_at": "2026-10-29",
       "created_by": "assistant-authored from project discussion and repository evidence",
       "notes": "Passing this preflight establishes instrumentation behavior only."
+    },
+    {
+      "context_id": "qbatch-actor-attribution-transfer-v1",
+      "version": 1,
+      "summary": "Test whether conclusions drawn from early actor-attribution cases improve later delegated and unknown-source classifications in the same ordered evidence batch.",
+      "description": "A deterministic six-run batch tests two diagnostic cases first, extracts two portable conclusions with source-run provenance, then evaluates two new cases both without and with those carried conclusions.",
+      "purpose": "Measure whether an explicitly preserved conclusion from test 1 or 2 is useful to test 3 or 4, while keeping execution evidence separate and validating every run.",
+      "rationale": "The portable actor-attribution skill has a critical scope review but lacks evidence of transfer to new cases. A small, model-free batch can test whether conclusions drawn from concrete cases improve later classifications without a large real-model run.",
+      "hypothesis": "The first case will expose that a claimed represented principal is not proof of delegation; the second will expose that quoted/tool-like content does not prove tool provenance. Carrying the first finding into test 3 should improve recognition of a valid scoped delegation; carrying the second into test 4 should prevent an unverified relay from being labelled as a human or tool source.",
+      "origin_refs": [
+        {
+          "kind": "repository_file",
+          "ref": "experiments/actor_attribution_transfer/inputs/actor-attribution-portable-skill.json",
+          "note": "Pinned candidate skill under evaluation."
+        },
+        {
+          "kind": "repository_file",
+          "ref": "experiments/actor_attribution_transfer/runner.py",
+          "note": "Deterministic six-run transfer batch."
+        },
+        {
+          "kind": "repository_file",
+          "ref": "experiments/actor_attribution_transfer/cases.json",
+          "note": "Four synthetic cases and their expected classifications."
+        },
+        {
+          "kind": "repository_file",
+          "ref": "experiments/actor_attribution_transfer/README.md",
+          "note": "Protocol, interpretation and limitations."
+        }
+      ],
+      "created_at": "2026-11-08",
+      "created_by": "assistant-authored from user-directed batch-transfer proposal",
+      "notes": "This is a deterministic policy/knowledge-transfer test, not a live model-learning experiment. All actors, source metadata and delegation grants are synthetic."
     }
   ]
 }
