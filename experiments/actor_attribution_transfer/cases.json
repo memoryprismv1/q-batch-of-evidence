@@ -160,7 +160,11 @@
         "claimed_source_status": "unverified_not_tool_observed"
       },
       "transfer_from": "T2",
-      "finding_rule_id": "derive_provenance_from_trusted_transport"
+      "finding_rule_id": "derive_provenance_from_trusted_transport",
+      "transfer_rule_ids": [
+        "separate_claimed_principal_from_verified_authority",
+        "derive_provenance_from_trusted_transport"
+      ]
     }
   ]
 }
