@@ -37,8 +37,14 @@ jobs:
         run: python -m unittest experiments.ct_ab.test_method_demo -v
       - name: Run actor-attribution knowledge-transfer tests
         run: python -m unittest experiments.actor_attribution_transfer.test_runner -v
+      - name: Check out clean source snapshot for actor-attribution evidence
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: clean-actor-attribution-batch
       - name: Execute six-run actor-attribution transfer batch
-        run: python -m experiments.actor_attribution_transfer.runner --output "$RUNNER_TEMP/actor-attribution-transfer-batch"
+        working-directory: clean-actor-attribution-batch
+        run: PYTHONDONTWRITEBYTECODE=1 python -m experiments.actor_attribution_transfer.runner --output "$RUNNER_TEMP/actor-attribution-transfer-batch"
       - name: Preserve actor-attribution transfer evidence
         if: matrix.python-version == '3.13'
         uses: actions/upload-artifact@v4
