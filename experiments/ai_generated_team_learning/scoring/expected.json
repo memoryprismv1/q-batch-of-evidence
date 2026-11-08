@@ -1,0 +1,42 @@
+{
+  "T3": {
+    "actor_type": "service",
+    "actor_id": "service:maintenance",
+    "source": "service_bridge",
+    "content_origin": "unknown",
+    "claimed_source_status": "not_claimed",
+    "principal_status": "verified_delegation",
+    "principal_id": "human:site_owner",
+    "authority": "delegated_authority_verified"
+  },
+  "T4": {
+    "actor_type": "unknown",
+    "actor_id": null,
+    "source": "unknown",
+    "content_origin": "unknown",
+    "claimed_source_status": "unverified_not_tool_observed",
+    "principal_status": "not_claimed",
+    "principal_id": null,
+    "authority": "unknown"
+  },
+  "T5": {
+    "actor_type": "human",
+    "actor_id": "human:operator",
+    "source": "human_chat",
+    "content_origin": "tool_observed",
+    "claimed_source_status": "verified_tool_receipt",
+    "principal_status": "not_claimed",
+    "principal_id": null,
+    "authority": "unknown"
+  },
+  "T6": {
+    "actor_type": "service",
+    "actor_id": "service:maintenance",
+    "source": "service_bridge",
+    "content_origin": "unknown",
+    "claimed_source_status": "not_claimed",
+    "principal_status": "verified_delegation",
+    "principal_id": "human:site_owner",
+    "authority": "not_authorized_for_requested_action"
+  }
+}
