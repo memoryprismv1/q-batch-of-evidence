@@ -41,6 +41,7 @@ This repository is also the canonical home for Q-Batch's reference implementatio
 - `experiments/ct_ab/` — paired-run harness, event schema, validation, preflight and deterministic method demonstration.
 - `experiments/checklist_elaboration/` — four-condition MP × CT planning experiment, frozen task fixture, runner and scoring materials.
 - `experiments/qbatch_historical_analysis/` — read-only historical evidence and cohort analysis.
+- `experiments/actor_attribution_transfer/` — a six-run batch where T1/T2 conclusions are preserved as portable context and used to test transfer into T3/T4, with immutable run receipts.
 - [Pilot plan](PILOT_PLAN.md) — current status and limitations of the AEL-related pilot.
 
 The [Q-Batch regression workflow](.github/workflows/tests.yml) runs deterministic and synthetic test suites. Real-model execution is controlled only by the manual, private [Differential workflow](https://github.com/memoryprismv1/the-differential-library/blob/main/.github/workflows/qbatch-checklist-elaboration.yml); this public repository contains no workflow that uploads raw real-model traces.
