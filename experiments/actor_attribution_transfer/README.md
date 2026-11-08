@@ -78,6 +78,31 @@ The output directory must be new or empty. It contains:
 
 The normal Q-Batch CI executes the batch and uploads a synthetic evidence artifact. That CI artifact has a finite retention period; it is a convenient receipt, not a selected long-term archive.
 
+## Latest execution result — 8 November 2026
+
+<details>
+<summary>Q-Batch CI run #8 — PASS</summary>
+
+[Workflow run #8](https://github.com/memoryprismv1/q-batch-of-evidence/actions/runs/42476841537) passed the full Q-Batch CI matrix on Python 3.11, 3.12 and 3.13. The actor-attribution batch executed from a separate clean checkout pinned to commit `63d350b2c9b511d0c3654d787a9a68a317db7ea5`.
+
+Observed batch results:
+
+- **T1 passed:** the baseline accepted a self-asserted actor ID and claimed delegation; the skill-informed result retained the host-verified agent identity and treated the principal claim and authority as unverified.
+- **T2 passed:** the baseline labelled quoted content as tool-observed; the skill-informed result classified it as a human-submitted statement because the trusted transport was a human chat and no tool receipt existed.
+- **T3 improved with T1 context:** without the carried conclusion, the baseline did not recognise the service's valid scoped delegation. With the context, the evaluator recognised the authenticated grant and matching action scope as delegated authority.
+- **T4 improved with T1 and T2 context:** the baseline accepted a self-described human, tool source and direct-user authority. With both conclusions, the evaluator preserved unknown actor, source and authority because identity and transport evidence were absent.
+- All six run logs validated; both T3/T4 pairs passed Q-Batch pair validation; the carried context retained source run IDs, event-stream hashes and decision-artifact SHA-256 receipts.
+- All six run manifests record `runner_worktree_clean: true`. The run made zero model calls and used zero external services.
+
+The machine-readable result is `batch-report.json` in the downloadable CI artifact `actor-attribution-transfer-batch`.
+
+Artifact details:
+- Artifact ID: `13615613261`
+- SHA-256: `e08cd703616d8490e8404ffa25342bf8c885d26100963d42bb60fceb07cb9b24`
+- Expires: 8 December 2026 (GitHub Actions retention: 30 days)
+
+</details>
+
 ## Interpretation limits
 
 - The evaluator is deterministic and explicitly implements the reviewed distinctions. It does not ask a language model to read or learn from the file.
