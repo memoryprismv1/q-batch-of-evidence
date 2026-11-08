@@ -37,6 +37,8 @@ jobs:
         run: python -m unittest experiments.ct_ab.test_method_demo -v
       - name: Run actor-attribution knowledge-transfer tests
         run: python -m unittest experiments.actor_attribution_transfer.test_runner -v
+      - name: Run AI-generated team-learning harness tests (fake client only)
+        run: python -m unittest experiments.ai_generated_team_learning.test_runner -v
       - name: Check out clean source snapshot for actor-attribution evidence
         uses: actions/checkout@v4
         with:
